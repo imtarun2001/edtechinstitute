@@ -1,0 +1,70 @@
+
+  
+  .contact-us {
+    width: 600px;
+    margin: 50px auto;
+    background-color: #d5fbff;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #00796b;
+  }
+  
+  .contact-us>h2 {
+    margin-bottom: 20px;
+    color: #004d40;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    text-align: left;
+  }
+  
+  label {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+    color: #006064;
+  }
+  
+  .inputs, textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    background-color: black;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus, textarea:focus {
+    border-color: #00796b;
+  }
+  
+  .subitholder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .submit-btn {
+    width: 50%;
+    background-color: #00796b;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background-color: #004d40; /* Darker aqua on hover */
+  }
+  

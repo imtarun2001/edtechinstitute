@@ -1,0 +1,23 @@
+.filterbar {
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: blueviolet;
+}
+
+.filterbtn {
+    color: black;
+    background-color: aliceblue;
+    border: 2px solid black;
+    font-weight: 700;
+}
+
+.filterbtn:hover {
+    color: blueviolet;
+    background-color: black;
+    border: 2px solid aliceblue;
+}
