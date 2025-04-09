@@ -1,8 +1,9 @@
 import React from 'react'
-import './Title.css'
 
 export default function Title() {
   return (
-    <div className='title'>Top Courses</div>
+    <div className="text-3xl font-extrabold text-purple-600 flex justify-center items-center p-4">
+      Top Courses
+    </div>
   )
 }

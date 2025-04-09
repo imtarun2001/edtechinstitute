@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { TbBrandCpp } from "react-icons/tb";
 import { FaJava } from "react-icons/fa";
 import { SiPython } from "react-icons/si";
@@ -16,12 +16,10 @@ import { FaCloud } from "react-icons/fa";
 import { GiArtificialIntelligence } from "react-icons/gi";
 import { SiMicrosoftexcel } from "react-icons/si";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import './Home.css'
 import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
-
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   function gotoCourses() {
     navigate('/topcourses');
@@ -31,37 +29,47 @@ export default function Dashboard() {
     navigate('/tutors');
   }
 
+  const iconClass = "text-[25px] mx-2 z-20";
 
   return (
-    <div className='homepage'>
-      <div className='contents welicon'>
-          <div className="odd cpp"><TbBrandCpp /></div>
-          <div className="even java"><FaJava /></div>
-          <div className="odd python"><SiPython /></div>
-          <div className="even css"><FaCss3 /></div>
-          <div className="odd html"><FaHtml5 /></div>
-          <div className="even node"><FaNode /></div>
-          <div className="odd js"><IoLogoJavascript /></div>
-          <div className="even angular"><FaAngular /></div>
+    <div className="min-h-screen w-[98%] bg-[#002f57] flex flex-col justify-around items-center gap-3 font-['Prosto_One','sans-serif']">
+      <div className="w-[90%] flex flex-wrap justify-center items-center gap-5 text-white bg-black shadow-[0_0_20px_white] p-4">
+        <div className={`${iconClass} text-blue-600`}><TbBrandCpp /></div>
+        <div className={`${iconClass} text-red-600`}><FaJava /></div>
+        <div className={`${iconClass} text-yellow-400`}><SiPython /></div>
+        <div className={`${iconClass} text-blue-500`}><FaCss3 /></div>
+        <div className={`${iconClass} text-pink-700`}><FaHtml5 /></div>
+        <div className={`${iconClass} text-green-700`}><FaNode /></div>
+        <div className={`${iconClass} text-yellow-300`}><IoLogoJavascript /></div>
+        <div className={`${iconClass} text-red-700`}><FaAngular /></div>
+        <div className={`${iconClass} text-cyan-400`}><FaReact /></div>
+        <div className={`${iconClass} text-blue-600`}><FaDocker /></div>
+        <div className={`${iconClass} text-blue-700`}><SiKubernetes /></div>
+        <div className={`${iconClass} text-blue-500`}><FaCloud /></div>
+        <div className={`${iconClass} text-green-600`}><FaVuejs /></div>
+        <div className={`${iconClass} text-cyan-300`}><SiMysql /></div>
+        <div className={`${iconClass} text-pink-500`}><GiArtificialIntelligence /></div>
+        <div className={`${iconClass} text-green-700`}><SiMicrosoftexcel /></div>
 
-          <div className='welcome'>
-            <h2>WELCOME</h2>
-            <h3>to the world of</h3>
-            <h2>TECHNOLOGY</h2>
-          </div>
+        <div className="text-purple-400 text-center px-6">
+          <h2 className="text-2xl font-bold">WELCOME</h2>
+          <h3 className="text-lg">to the world of</h3>
+          <h2 className="text-2xl font-bold">TECHNOLOGY</h2>
+        </div>
 
-          <div className="odd react"><FaReact /></div>
-          <div className="even docker"><FaDocker /></div>
-          <div className="odd kubernetes"><SiKubernetes /></div>
-          <div className="even cloud"><FaCloud /></div> 
-          <div className="odd vue"><FaVuejs /></div>
-          <div className="even mysql"><SiMysql /></div> 
-          <div className="odd ai"><GiArtificialIntelligence /></div>
-          <div className="even excel"><SiMicrosoftexcel /></div>
       </div>
-      <div className='contents weupgrade'><h3>We upgrade the wanderers to the wonders of tech world</h3></div>
-      <div className='contents courses' onClick={gotoCourses}><h3>Courses provided by us <FaExternalLinkAlt /></h3></div>
-      <div className='contents tutors' onClick={gotoTutors}><h3>Tutors of our organization <FaExternalLinkAlt /></h3></div>
+
+      <div className="w-4/5 bg-black flex justify-center items-center text-[25px] text-purple-200 p-4 text-center">
+        <h3>We upgrade the wanderers to the wonders of tech world</h3>
+      </div>
+
+      <div onClick={gotoCourses} className="w-[250px] cursor-pointer underline bg-transparent text-white text-center p-3 hover:text-indigo-400">
+        <h3>Courses provided by us <FaExternalLinkAlt className="inline ml-2" /></h3>
+      </div>
+
+      <div onClick={gotoTutors} className="w-[270px] cursor-pointer underline bg-transparent text-white text-center p-3 hover:text-indigo-400">
+        <h3>Tutors of our organization <FaExternalLinkAlt className="inline ml-2" /></h3>
+      </div>
     </div>
-  )
+  );
 }

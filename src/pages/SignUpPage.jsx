@@ -1,114 +1,161 @@
-import React, { useState } from 'react'
-import { FcGoogle } from "react-icons/fc";
-import { AiOutlineEye } from "react-icons/ai";
-import { AiOutlineEyeInvisible } from "react-icons/ai";
-import toast from 'react-hot-toast';
-import './SignUpPage.css'
+import React, { useState } from 'react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
-export default function SignUpPage() {
-
-  const [showPassword,setShowPassword] = useState(false);
-  const [showConfirmPassword,setShowConfirmPassword] = useState(false);
-
-  const [formData,setFormData] = useState({
-    "fname" : "",
-    "lname" : "",
-    "email" : "",
-    "pass" : "",
-    "conpass" : ""
-  });
-
+export default function SignUpPage({ setIsLoggedIn }) {
   const navigate = useNavigate();
 
-  function gotoLogIn() {
-    if(formData.fname!==""&&formData.lname!==""&&formData.email!==""&&formData.pass!==""&&formData.conpass!=="") {
-      if(formData.pass===formData.conpass) {
-        navigate('/loginpage');
-        toast.success("Account created successfully");
-        console.log("Account created successfully")
-      }
-      else {
-        toast.error("Password mismatched");
-        console.error("Password mismatched");
-      }
-    }
-    else {
-      toast.error("Fill all the required fields");
-      console.warn("Fill all the required fields");
-    }
+  const [showPass, setShowPass] = useState(false);
+  const [showConPass, setShowConPass] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  function changeHandler(e) {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   }
 
-  function changeHandler(event) {
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [event.target.name] : event.target.value
+  function handleSignUp() {
+    if (
+      formData.firstName &&
+      formData.lastName &&
+      formData.email &&
+      formData.password &&
+      formData.confirmPassword
+    ) {
+      if (formData.password !== formData.confirmPassword) {
+        toast.error("Passwords do not match");
+        return;
       }
-    })
+
+      toast.success("Account created successfully");
+      setIsLoggedIn(true);
+      navigate('/dashboard');
+    } else {
+      toast.error("Please fill all fields");
+    }
   }
 
   return (
-    <div className='signuppage'>
-      <div className='contentsofsignup'>
-        <div><h2>Register to be a part of millions who follow their passion...</h2></div>
-        <div className='build'>Build skills for today, tomorrow and beyond</div>
-        <div><i>Education to make your future bright</i></div>
-        
+    <div className="min-h-screen flex flex-col md:flex-row items-center justify-evenly bg-yellow-100 font-['Sour_Gummy'] p-4">
+      <div className="w-full max-w-md bg-yellow-300 text-black p-6 rounded-md shadow-lg space-y-4">
+        <h2 className="text-2xl font-bold text-center">Create your account</h2>
 
-
-        <div className='nameholder'>
-              <div className='fname'>
-                <label htmlFor="fname">First Name<sup>*</sup></label>
-                <input type="text" name="fname" id="fname" placeholder='Enter First Name' onChange={changeHandler} value={formData.fname}/>
-              </div>
-              <div className='fname'>
-                <label htmlFor="lname">Last Name<sup>*</sup></label>
-                <input type="text" name="lname" id="lname"  placeholder='Enter Last Name' onChange={changeHandler} value={formData.lname}/>
-              </div>
+        {/* Name Fields */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col w-full">
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="John"
+              className="p-2 border border-black rounded bg-black text-white"
+              onChange={changeHandler}
+              value={formData.firstName}
+            />
+          </div>
+          <div className="flex flex-col w-full">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Doe"
+              className="p-2 border border-black rounded bg-black text-white"
+              onChange={changeHandler}
+              value={formData.lastName}
+            />
+          </div>
         </div>
 
-        <div className="emailholder">
-          <label htmlFor="email">Email<sup>*</sup></label>
-          <input type="email" name="email" id="email" placeholder='Enter Email' onChange={changeHandler} value={formData.email}/>
+        {/* Email */}
+        <div className="flex flex-col">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="example@mail.com"
+            className="p-2 border border-black rounded bg-black text-white"
+            onChange={changeHandler}
+            value={formData.email}
+          />
         </div>
 
-        <div className='passholder'>
-              <div className='pass'>
-                <label htmlFor="pass">Create a password<sup>*</sup></label>
-                <input type={showPassword ? "text" : "password"} name="pass" id="pass" placeholder='Create Password'  onChange={changeHandler} value={formData.pass}/>
-                <span onClick={() => setShowPassword(!showPassword)} className='showpassicon'>
-                  {
-                    showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />
-                  }
-                </span>
-              </div>
-              <div className='pass'>
-                <label htmlFor="conpass">Confirm Password<sup>*</sup></label>
-                <input type={showConfirmPassword ? "text" : "password"} name="conpass" id="conpass"  placeholder='Enter Password again'  onChange={changeHandler} value={formData.conpass}/>
-                <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className='showconpassicon'>
-                  {
-                    showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />
-                  }
-                </span>
-              </div>
+        {/* Password Fields */}
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col w-full relative">
+            <label htmlFor="password">Password</label>
+            <input
+              type={showPass ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              className="p-2 border border-black rounded bg-black text-white"
+              onChange={changeHandler}
+              value={formData.password}
+            />
+            <span
+              onClick={() => setShowPass(!showPass)}
+              className="absolute right-3 bottom-2 text-gray-300 cursor-pointer hover:text-white"
+            >
+              {showPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </span>
+          </div>
+          <div className="flex flex-col w-full relative">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type={showConPass ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              className="p-2 border border-black rounded bg-black text-white"
+              onChange={changeHandler}
+              value={formData.confirmPassword}
+            />
+            <span
+              onClick={() => setShowConPass(!showConPass)}
+              className="absolute right-3 bottom-2 text-gray-300 cursor-pointer hover:text-white"
+            >
+              {showConPass ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </span>
+          </div>
         </div>
 
-
-
-        <div className='signinbtn' onClick={gotoLogIn}>SIGN IN</div>
-        <div className='or'>
-          <div></div>
-          <p>or</p>
-          <div></div>
+        {/* Sign Up Button */}
+        <div
+          onClick={handleSignUp}
+          className="w-full bg-black text-white py-2 rounded cursor-pointer text-center hover:bg-gray-900 transition"
+        >
+          SIGN UP
         </div>
-        <div className='signinbtngoogle'>
-        <FcGoogle /> &nbsp;Sign in with Google
+
+        {/* Divider */}
+        <div className="flex items-center gap-2 my-2">
+          <div className="flex-grow h-px bg-black"></div>
+          <span className="text-sm">or</span>
+          <div className="flex-grow h-px bg-black"></div>
+        </div>
+
+        {/* Google Signup */}
+        <div className="flex items-center justify-center gap-2 bg-gray-700 text-white py-2 rounded cursor-pointer hover:bg-black transition">
+          <FcGoogle className="text-xl" /> Sign up with Google
         </div>
       </div>
-      <div>
-        <img src="https://thumbs.dreamstime.com/b/office-teamwork-business-meeting-talking-employees-busy-corporate-cartoon-workers-businessman-team-works-together-115749721.jpg" alt="" height="300px"/>
+
+      {/* Optional image or visual */}
+      <div className="hidden md:block mt-10 md:mt-0">
+        <img
+          src="https://www.shutterstock.com/image-vector/business-meeting-flat-people-on-600nw-1290353356.jpg"
+          alt="Illustration"
+          className="max-w-md rounded shadow-lg"
+        />
       </div>
     </div>
-  )
+  );
 }
